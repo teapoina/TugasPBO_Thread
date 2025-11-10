@@ -1,15 +1,21 @@
-💸 #Simulasi Transaksi Manhwa Store
-📝 Summary
+# 💸 Simulasi Transaksi **Manhwa Store**
+Audina Jelita - F1D02310039
+---
 
-Project ini merupakan latihan untuk mata kuliah PBO dengan topik Thread dan JDBC (Database Transaction).
-Pada project ini, saya membuat simulasi transaksi pembelian manhwa yang melibatkan dua komponen utama, yaitu class Transaction (representasi proses pembelian yang berjalan di thread terpisah) dan class DatabaseConnection (penyedia koneksi ke database MySQL).
+## 🧩 **Summary**
 
-Setiap objek Transaction mensimulasikan satu pembelian manhwa.
-Proses dilakukan dengan menggunakan fitur transaksi database (commit, rollback) dan penguncian data (SELECT ... FOR UPDATE) untuk mencegah race condition ketika beberapa thread mencoba membeli manhwa yang sama secara bersamaan.
+Project ini merupakan latihan untuk mata kuliah **Pemrograman Berorientasi Objek (PBO)** dengan topik **Thread dan JDBC (Database Transaction)**.  
+Pada project ini, saya membuat *simulasi transaksi pembelian manhwa* yang memanfaatkan dua komponen utama:
 
-Dengan demikian, sistem ini memperlihatkan bagaimana konkurensi dan integritas data dapat dijaga melalui penggunaan Thread di Java dan transaksi di JDBC.
+- 🧠 **`Transaction`** → merepresentasikan proses pembelian (setiap transaksi berjalan di thread terpisah).  
+- 💾 **`DatabaseConnection`** → menyediakan koneksi ke database **MySQL** menggunakan **JDBC**.
 
-📂 Struktur File
+> Tujuan utama dari project ini adalah untuk memperlihatkan bagaimana *konkurensi dan integritas data* dapat dijaga menggunakan **thread di Java** serta **manajemen transaksi (commit & rollback)** dalam database.
+
+---
+
+## 📂 **Struktur Proyek**
+
 manhwa-store/
 │
 ├─ lib/                         # JDBC driver MySQL
@@ -20,18 +26,27 @@ manhwa-store/
 │   └─ TestConnection.java       # (Opsional) Untuk mengetes koneksi ke database
 └─ out/
 
-⚙️ Alur Kerja
 
-Program dimulai melalui Main
-Membuat beberapa objek Transaction dengan ID manhwa dan jumlah pembelian berbeda.
-Setiap Transaction dijalankan di thread terpisah menggunakan Thread.start().
-Class Transaction berjalan
-Membuka koneksi ke database menggunakan DatabaseConnection.
-Mengatur transaction isolation level menjadi READ_COMMITTED.
-Melakukan query:
+---
 
+## ⚙️ **Alur Kerja Program**
+
+### 1️⃣ Inisialisasi
+Program dimulai dari `Main`.  
+Beberapa objek **Transaction** dibuat dengan ID dan jumlah pembelian berbeda.  
+Setiap transaksi dijalankan di **thread** terpisah menggunakan `Thread.start()`.
+
+---
+
+### 2️⃣ Proses Transaksi
+Setiap thread `Transaction` akan:
+1. Membuka koneksi ke database melalui `DatabaseConnection`.
+2. Mengatur *transaction isolation level* menjadi:
+   ```java
+   connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+
+melakukan query:
 SELECT stock FROM manhwa WHERE id = ? FOR UPDATE
-
 untuk mengunci baris data manhwa yang akan diperbarui.
 
 Validasi dan pembaruan stok
