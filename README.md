@@ -15,7 +15,7 @@ Pada project ini, saya membuat *simulasi transaksi pembelian manhwa* yang memanf
 ---
 
 ## 📂 **Struktur Proyek**
-
+```java
 manhwa-store/
 │
 ├─ lib/                         # JDBC driver MySQL
@@ -25,7 +25,7 @@ manhwa-store/
 │   ├─ Main.java                 # Menjalankan simulasi multithread transaksi
 │   └─ TestConnection.java       # (Opsional) Untuk mengetes koneksi ke database
 └─ out/
-
+```
 
 ---
 
@@ -46,7 +46,9 @@ Setiap thread `Transaction` akan:
    connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 
 melakukan query:
+```java
 SELECT stock FROM manhwa WHERE id = ? FOR UPDATE
+```
 untuk mengunci baris data manhwa yang akan diperbarui.
 
 Validasi dan pembaruan stok
