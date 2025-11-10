@@ -59,8 +59,9 @@ DatabaseConnection
 Menghubungkan Java dengan MySQL melalui JDBC.
 
 Menggunakan URL:
+```java
 jdbc:mysql://localhost:3306/manhwa_store?useSSL=false&allowPublicKeyRetrieval=true
-
+```
 Output terminal
 Menampilkan hasil setiap transaksi:
 Transaksi berhasil untuk manhwa 1: 3 dibeli.
@@ -74,7 +75,7 @@ Setelah semua thread Transaction selesai dijalankan, program berakhir.
 1️⃣ Siapkan Database di MySQL (phpMyAdmin)
 
 Jalankan query berikut untuk membuat database dan tabel:
-
+```java
 CREATE DATABASE IF NOT EXISTS manhwa_store;
 USE manhwa_store;
 
@@ -91,13 +92,15 @@ INSERT INTO manhwa (title, author, price, stock) VALUES
 ('Tower of God', 'SIU', 80000, 8),
 ('Noblesse', 'Son Jeho', 70000, 5),
 ('The Beginning After The End', 'TurtleMe', 90000, 12);
-
+```
 2️⃣ Compile source code
+```java
 javac -cp ".;lib/mysql-connector-j-9.5.0.jar" -d out src/*.java
-
+```
 3️⃣ Jalankan program
+```java
 java -cp "out;lib/mysql-connector-j-9.5.0.jar" src.Main
-
+```
 🧠 Contoh Output
 Transaksi berhasil untuk manhwa 1: 3 dibeli.
 Transaksi gagal untuk manhwa 1: stok tidak cukup.
